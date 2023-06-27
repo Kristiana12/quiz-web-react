@@ -6,12 +6,18 @@ import StartScreen from './components/StartScreen';
 import { useContext } from 'react';
 import { QuizzContext } from './context/context-quiz';
 import QuizzForm from './components/QuizzForm';
+import Loader from './components/UI/Loader';
 
 const App = () => {
-  const { currentPage } = useContext(QuizzContext);
+  const { currentPage, status } = useContext(QuizzContext);
 
-  if (currentPage === 'startScreen') return <StartScreen />;
-  if (currentPage === 'quizzForm') return <QuizzForm />;
+  return (
+    <>
+      {currentPage === 'startScreen' && <StartScreen />}
+      {currentPage === 'quizzForm' && <QuizzForm />}
+      {status === 'loading' && <Loader />}
+    </>
+  );
 };
 
 export default App;

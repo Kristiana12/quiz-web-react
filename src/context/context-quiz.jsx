@@ -4,7 +4,13 @@ export const QuizzContext = createContext(null);
 
 const intialState = {
   questions: [],
-  status: null,
+  status: 'loading',
+  usersOptions: {
+    category: 'any-category',
+    numOfQuestions: 5,
+    difficulty: 'any-difficulty',
+    index: 0,
+  },
   currentPage: 'startScreen',
 };
 
@@ -12,14 +18,38 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'quizzForm':
       return { ...state, currentPage: 'quizzForm' };
+    case 'getCategory':
+      return {
+        ...state,
+        usersOptions: { ...state.usersOptions, category: action.payload },
+      };
+    case 'getNumOfQuestions':
+      return {
+        ...state,
+        usersOptions: { ...state.usersOptions, numOfQuestions: action.payload },
+      };
+    case 'getDifficulty':
+      return {
+        ...state,
+        usersOptions: { ...state.usersOptions, difficulty: action.payload },
+      };
+    case 'fetchQuestions':
+      return {
+        ...state,
+        questions: action.payload,
+        status: 'ready',
+        currentPage: 'Questions',
+      };
   }
 };
+
 /* eslint-disable */
 const QuizzProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, intialState);
-  const { questions, status, currentPage } = state;
+  const { questions, status, currentPage, usersOptions } = state;
 
-  const data = { questions, status, currentPage, dispatch };
+  const data = { questions, status, currentPage, dispatch, usersOptions };
+  console.log(questions);
 
   return <QuizzContext.Provider value={data}>{children}</QuizzContext.Provider>;
 };

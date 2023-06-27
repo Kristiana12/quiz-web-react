@@ -1,9 +1,9 @@
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 import { useContext } from 'react';
 import { QuizzContext } from '../context/context-quiz';
+import MuiButton from './UI/Button';
 
 const StartScreen = () => {
   const { dispatch } = useContext(QuizzContext);
@@ -15,7 +15,7 @@ const StartScreen = () => {
         sx={{ alignItems: 'center', justifyContent: 'center' }}
       >
         <Grid item xs={12}>
-          <Typography variant="h3" component="h1">
+          <Typography variant="h4" component="h1" lineHeight={1.6}>
             Reinforce your learning and test your knowledge by taking a quiz!
           </Typography>
         </Grid>
@@ -27,12 +27,12 @@ const StartScreen = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button
+          <MuiButton
             onClick={() => dispatch({ type: 'quizzForm' })}
             variant="contained"
           >
             Get Started!
-          </Button>
+          </MuiButton>
         </Grid>
       </Grid>
     </StyledHeader>
