@@ -4,7 +4,6 @@ export const QuizzContext = createContext(null);
 
 const intialState = {
   questions: [],
-  status: 'loading',
   usersOptions: {
     category: 'any-category',
     numOfQuestions: 5,
@@ -34,7 +33,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         questions: action.payload,
-        status: 'ready',
       };
   }
 };
@@ -42,9 +40,9 @@ const reducer = (state, action) => {
 /* eslint-disable */
 const QuizzProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, intialState);
-  const { questions, status, currentPage, usersOptions } = state;
+  const { questions, currentPage, usersOptions } = state;
 
-  const data = { questions, status, currentPage, dispatch, usersOptions };
+  const data = { questions, currentPage, dispatch, usersOptions };
   console.log(questions);
 
   return <QuizzContext.Provider value={data}>{children}</QuizzContext.Provider>;

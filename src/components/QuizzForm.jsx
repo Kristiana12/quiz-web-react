@@ -4,6 +4,7 @@ import SelectField from './UI/SelectField';
 import Box from '@mui/material/Box';
 import { useContext } from 'react';
 import { QuizzContext } from '../context/context-quiz';
+import { useNavigate } from 'react-router-dom';
 import MuiButton from './UI/Button';
 
 import styled from 'styled-components';
@@ -77,11 +78,15 @@ const difficulty = [
   },
 ];
 
-const QuizzForm = () => {
+// eslint-disable-next-line
+const QuizzForm = ({ setLoading }) => {
   const { dispatch, usersOptions } = useContext(QuizzContext);
+  const navigate = useNavigate();
 
   const fetchQuestionsHandler = async () => {
-    console.log('fetch');
+    setLoading(true);
+
+    //Users data
     const category =
       usersOptions.category === 'any-category'
         ? ''
@@ -98,6 +103,10 @@ const QuizzForm = () => {
 
     const data = await response.json();
     dispatch({ type: 'fetchQuestions', payload: data });
+    //redirect to new page
+    navigate('/questions');
+
+    setLoading(false);
   };
 
   return (
@@ -147,7 +156,7 @@ const QuizzForm = () => {
         <Grid item xs={12} sx={{ alignSelf: 'center' }}>
           <Box display="flex" justifyContent="center">
             <MuiButton variant="contained" onClick={fetchQuestionsHandler}>
-              Start The Quizz!
+              Start Quiz!
             </MuiButton>
           </Box>
         </Grid>
