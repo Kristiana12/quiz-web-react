@@ -1,12 +1,11 @@
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { QuizzContext } from '../context/context-quiz';
 import MuiButton from './UI/Button';
+import SouthRoundedIcon from '@mui/icons-material/SouthRounded';
+import { Link } from 'react-scroll';
 
-const StartScreen = () => {
-  const { dispatch } = useContext(QuizzContext);
+const Header = () => {
   return (
     <StyledHeader>
       <Grid
@@ -27,12 +26,18 @@ const StartScreen = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <MuiButton
-            onClick={() => dispatch({ type: 'quizzForm' })}
-            variant="contained"
-          >
-            Get Started!
-          </MuiButton>
+          <Link to="form" spy={true} smooth={true} duration={500}>
+            <MuiButton href="#form" variant="contained">
+              Get Started!
+            </MuiButton>
+          </Link>
+        </Grid>
+        <Grid item xs={12}>
+          <SouthRoundedIcon
+            className="bounce-animation"
+            color="primary"
+            sx={{ fontSize: 60, marginTop: '5rem' }}
+          />
         </Grid>
       </Grid>
     </StyledHeader>
@@ -48,6 +53,20 @@ const StyledHeader = styled.header`
   justify-content: center;
   max-width: 850px;
   margin: 0 auto;
+
+  .bounce-animation {
+    animation: bounce 2.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
 `;
 
-export default StartScreen;
+export default Header;

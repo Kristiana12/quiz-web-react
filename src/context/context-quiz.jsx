@@ -11,13 +11,10 @@ const intialState = {
     difficulty: 'any-difficulty',
     index: 0,
   },
-  currentPage: 'startScreen',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'quizzForm':
-      return { ...state, currentPage: 'quizzForm' };
     case 'getCategory':
       return {
         ...state,
@@ -38,7 +35,6 @@ const reducer = (state, action) => {
         ...state,
         questions: action.payload,
         status: 'ready',
-        currentPage: 'Questions',
       };
   }
 };

@@ -97,12 +97,11 @@ const QuizzForm = () => {
     );
 
     const data = await response.json();
-    console.log(data);
     dispatch({ type: 'fetchQuestions', payload: data });
   };
 
   return (
-    <StyledMain>
+    <StyledMain id="form">
       <Grid container spacing={'5rem'}>
         <Grid item xs={12}>
           <Typography
@@ -158,9 +157,13 @@ const QuizzForm = () => {
 };
 
 const StyledMain = styled.main`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   max-width: 800px;
   margin: 0 auto;
-  padding: 5rem 1.5rem 0;
+  padding: 1rem 1.5rem 0;
 `;
 
 export default QuizzForm;

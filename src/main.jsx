@@ -4,6 +4,12 @@ import App from './App.jsx';
 import CssBaseline from '@mui/material/CssBaseline';
 import QuizzProvider from './context/context-quiz.jsx';
 import { createTheme, ThemeProvider } from '@mui/material';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -24,12 +30,16 @@ const theme = createTheme({
   },
 });
 
+const router = createBrowserRouter(
+  createRoutesFromElements(<Route path="/" element={<App />}></Route>)
+);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <QuizzProvider>
-        <App />
+        <RouterProvider router={router} />
       </QuizzProvider>
     </ThemeProvider>
   </React.StrictMode>
