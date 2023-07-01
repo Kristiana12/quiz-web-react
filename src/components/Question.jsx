@@ -1,66 +1,76 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+import { useContext } from 'react';
+import { QuizzContext } from '../context/context-quiz';
 
-const Question = () => {
+const buttonStyling = {
+  cursor: 'pointer',
+  transition: '0.5s',
+  '&:hover': {
+    borderColor: '#00b4d8',
+  },
+  '&.active': {
+    borderColor: '#00b4d8',
+    '&[disabled]': {
+      backgroundColor: 'rgba(0, 180, 216, 0.125)',
+      '&.correct': {
+        borderColor: '#2e7d32',
+        backgroundColor: 'rgba(76, 175, 79, 0.125)',
+      },
+      '&.error': {
+        borderColor: '#d32f2f',
+        backgroundColor: 'rgba(239, 83, 80, 0.125)',
+      },
+    },
+  },
+  '&.correct': {
+    borderColor: '#2e7d32',
+    backgroundColor: 'rgba(76, 175, 79, 0.125)',
+  },
+};
+
+const Question = ({ question }) => {
+  const { dispatch, answer, isCorrect, indexOfCorrectAnswer } =
+    useContext(QuizzContext);
+
+  const options = Object.entries(question.answers).map(
+    ([prop, value], index) => {
+      if (value)
+        return (
+          <Button
+            //Add active class to the selected item
+            className={`${answer === prop ? 'active' : ''} ${
+              isCorrect && index === indexOfCorrectAnswer ? 'correct' : 'error'
+            } ${index === indexOfCorrectAnswer ? 'correct' : ''}`}
+            variant="outlined"
+            key={uuidv4()}
+            sx={buttonStyling}
+            onClick={() => {
+              dispatch({ type: 'selectAnswer', payload: [prop, index] });
+            }}
+            disabled={answer ? true : false}
+          >
+            {value}
+          </Button>
+        );
+    }
+  );
+
   return (
     <>
-      <StyledHeader>
-        <StyledProgressBar value={1} max={15}></StyledProgressBar>
-        <Typography variant="h6" component="p">
-          Question: &nbsp;
-          <Typography
-            variant="h6"
-            component="span"
-            color="primary"
-            sx={{ fontWeight: 'bold' }}
-          >
-            1
-          </Typography>{' '}
-          / 15
-        </Typography>
-      </StyledHeader>
       <Stack spacing={4}>
-        <Paper variant="outlined" sx={{ padding: '3rem 1.125rem 3.5rem' }}>
-          <Typography variant="h4" component="h3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa,
-            praesentium?
+        <Paper variant="outlined" sx={{ padding: '2rem 1.125rem' }}>
+          <Typography variant="h5" component="h4">
+            {question.question}
           </Typography>
         </Paper>
-        <Stack spacing={2}>
-          <Paper variant="outlined" sx={{ cursor: 'pointer' }}>
-            <Typography variant="body2" component="p">
-              Lorem ipsum dolor sit amet consectetur.
-            </Typography>
-          </Paper>
-          <Paper variant="outlined" sx={{ cursor: 'pointer' }}>
-            <Typography variant="body2" component="p">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </Typography>
-          </Paper>
-          <Paper variant="outlined" sx={{ cursor: 'pointer' }}>
-            <Typography variant="body2" component="p">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </Typography>
-          </Paper>
-          <Paper variant="outlined" sx={{ cursor: 'pointer' }}>
-            <Typography variant="body2" component="p">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </Typography>
-          </Paper>
-        </Stack>
+        <Stack spacing={2}>{options}</Stack>
       </Stack>
     </>
   );
 };
-
-const StyledProgressBar = styled.progress`
-  width: 100%;
-`;
-
-const StyledHeader = styled.div`
-  margin-bottom: 2rem;
-`;
 
 export default Question;

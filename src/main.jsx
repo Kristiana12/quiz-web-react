@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import CssBaseline from '@mui/material/CssBaseline';
 import QuizzProvider from './context/context-quiz.jsx';
-import Questions from './components/Questions.jsx';
+import QuestionsContainer from './components/QuestionsContainer.jsx';
 import { createTheme, ThemeProvider } from '@mui/material';
 import {
   createBrowserRouter,
@@ -26,7 +26,10 @@ const theme = createTheme({
       secondary: '#0199b8',
     },
     action: {
-      active: '#737373',
+      active: '#979797',
+      disabled: '#0199b8',
+      disabledBackground: 'rgba(0, 180, 216, 0.125)',
+      disabledOpacity: 0.7,
     },
   },
   components: {
@@ -43,7 +46,7 @@ const theme = createTheme({
         root: {
           backgroundColor: '#323232',
           borderWidth: 3,
-          borderColor: '#979797',
+          borderColor: '#0199b8',
           borderRadius: 15,
           padding: '1.125rem',
         },
@@ -55,7 +58,7 @@ const theme = createTheme({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="questions" element={<Questions />}></Route>
+      <Route path="questions" element={<QuestionsContainer />}></Route>
     </Route>
   )
 );

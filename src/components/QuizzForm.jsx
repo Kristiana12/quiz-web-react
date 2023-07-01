@@ -98,7 +98,7 @@ const QuizzForm = ({ setLoading }) => {
         : '&difficulty=' + usersOptions.difficulty;
 
     const response = await fetch(
-      `https://quizapi.io/api/v1/questions?apiKey=N74ZmgxPhC99JymaaS3XK25AIR16Zhxk2ePrMcjs${category}${difficulty}&limit=${limit}`
+      `https://quizapi.io/api/v1/questions?apiKey=N74ZmgxPhC99JymaaS3XK25AIR16Zhxk2ePrMcjs${category}${difficulty}&limit=${limit}&filter=onlyMultipleCorrectAnswers`
     );
 
     const data = await response.json();

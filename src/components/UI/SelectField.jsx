@@ -2,9 +2,14 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
-const SelectField = function (
-  { options, label, id, defaultValue, dispatch, type } // eslint-disable-line
-) {
+const SelectField = function ({
+  options,
+  label,
+  id,
+  defaultValue,
+  dispatch,
+  type,
+}) {
   const clickHandler = (event) => {
     dispatch({ type: `${type}`, payload: event.target.value });
   };
@@ -27,14 +32,11 @@ const SelectField = function (
         color="primary"
         onChange={clickHandler}
       >
-        {
-          // eslint-disable-next-line
-          options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))
-        }
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
       </TextField>
     </Box>
   );
