@@ -1,15 +1,36 @@
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Question from './Question';
+import Question from '../Quizz/Question';
+import { QuizzContext } from '../../context/context-quiz';
+import MuiButton from '../UI/Button';
+import ProgressBar from '../Quizz/ProgressBar';
 import { useContext } from 'react';
-import { QuizzContext } from '../context/context-quiz';
-import MuiButton from './UI/Button';
-import ProgressBar from './ProgressBar';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionsContainer = () => {
   const { questions, index, answer, dispatch } = useContext(QuizzContext);
-  console.log(questions);
+  const navigate = useNavigate();
+
+  const displayedButton =
+    index + 1 === questions.length ? (
+      <MuiButton
+        variant="contained"
+        onClick={() => {
+          dispatch({ type: 'finishQuizz' });
+          navigate('/results');
+        }}
+      >
+        Finish Quiz
+      </MuiButton>
+    ) : (
+      <MuiButton
+        variant="contained"
+        onClick={() => dispatch({ type: 'nextQuestion' })}
+      >
+        Next
+      </MuiButton>
+    );
 
   return (
     <Container
@@ -35,12 +56,7 @@ const QuestionsContainer = () => {
         </Grid>
         {answer && (
           <Grid item xs={12} sx={{ textAlign: 'right' }}>
-            <MuiButton
-              variant="contained"
-              onClick={() => dispatch({ type: 'nextQuestion' })}
-            >
-              Next
-            </MuiButton>
+            {displayedButton}
           </Grid>
         )}
       </Grid>

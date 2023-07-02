@@ -2,11 +2,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import Header from './components/Header';
-import QuizzForm from './components/QuizzForm';
 import { Outlet, useLocation } from 'react-router-dom';
-import Loader from './components/UI/Loader';
 import { useState } from 'react';
+import Header from './components/Header';
+import QuizzForm from './components/Quizz/QuizzForm';
+import Loader from './components/UI/Loader';
 
 const App = () => {
   const location = useLocation();

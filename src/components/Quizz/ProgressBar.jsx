@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useContext } from 'react';
-import { QuizzContext } from '../context/context-quiz';
+import { QuizzContext } from '../../context/context-quiz';
 
 const ProgressBar = () => {
   const { index, questions } = useContext(QuizzContext);
@@ -11,7 +11,7 @@ const ProgressBar = () => {
     <Grid item xs={12}>
       <Stack spacing={2}>
         <StyledProgressBar
-          value={index}
+          value={index + 1}
           max={questions.length}
         ></StyledProgressBar>
         <Typography variant="h6" component="p" sx={{ alignSelf: 'end' }}>
@@ -22,8 +22,8 @@ const ProgressBar = () => {
             color="primary"
             sx={{ fontWeight: 'bold' }}
           >
-            {index}
-          </Typography>{' '}
+            {index + 1}
+          </Typography>
           / {questions.length}
         </Typography>
       </Stack>

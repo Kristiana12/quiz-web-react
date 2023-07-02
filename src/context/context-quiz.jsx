@@ -13,6 +13,7 @@ const intialState = {
   answer: null,
   isCorrect: null,
   indexOfCorrectAnswer: null,
+  correctAnswers: 0,
 };
 
 const reducer = (state, action) => {
@@ -53,6 +54,10 @@ const reducer = (state, action) => {
         answer: selectedAnswer,
         isCorrect: indexOfSelectedAnswer === indexOfRightAnswer,
         indexOfCorrectAnswer: indexOfRightAnswer,
+        correctAnswers:
+          indexOfSelectedAnswer === indexOfRightAnswer
+            ? state.correctAnswers + 1
+            : state.correctAnswers,
       };
     case 'nextQuestion':
       return {
@@ -62,10 +67,13 @@ const reducer = (state, action) => {
         isCorrect: null,
         indexOfCorrectAnswer: null,
       };
+    case 'finishQuizz':
+      return {
+        ...state,
+      };
   }
 };
 
-/* eslint-disable */
 const QuizzProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, intialState);
   const {
@@ -76,6 +84,7 @@ const QuizzProvider = ({ children }) => {
     answer,
     isCorrect,
     indexOfCorrectAnswer,
+    correctAnswers,
   } = state;
   // console.log(results);
 
@@ -88,10 +97,10 @@ const QuizzProvider = ({ children }) => {
     answer,
     isCorrect,
     indexOfCorrectAnswer,
+    correctAnswers,
   };
 
   return <QuizzContext.Provider value={data}>{children}</QuizzContext.Provider>;
 };
-/* eslint-enable */
 
 export default QuizzProvider;

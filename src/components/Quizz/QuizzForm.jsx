@@ -1,11 +1,11 @@
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import SelectField from './UI/SelectField';
 import Box from '@mui/material/Box';
-import { useContext } from 'react';
-import { QuizzContext } from '../context/context-quiz';
+import SelectField from '../UI/SelectField';
+import MuiButton from '../UI/Button';
 import { useNavigate } from 'react-router-dom';
-import MuiButton from './UI/Button';
+import { useContext } from 'react';
+import { QuizzContext } from '../../context/context-quiz';
 
 import styled from 'styled-components';
 
@@ -13,6 +13,10 @@ const categories = [
   {
     value: 'any-category',
     label: 'Any Category',
+  },
+  {
+    value: 'linux',
+    label: 'Linux',
   },
   {
     value: 'bash',
@@ -98,7 +102,7 @@ const QuizzForm = ({ setLoading }) => {
         : '&difficulty=' + usersOptions.difficulty;
 
     const response = await fetch(
-      `https://quizapi.io/api/v1/questions?apiKey=N74ZmgxPhC99JymaaS3XK25AIR16Zhxk2ePrMcjs${category}${difficulty}&limit=${limit}&filter=onlyMultipleCorrectAnswers`
+      `https://quizapi.io/api/v1/questions?apiKey=Kd5IrK7ez752QswbvDGtiPlQsigLtKJyhjhypArd${category}${difficulty}&limit=${limit}&filter=onlyMultipleCorrectAnswers`
     );
 
     const data = await response.json();

@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import CssBaseline from '@mui/material/CssBaseline';
-import QuizzProvider from './context/context-quiz.jsx';
-import QuestionsContainer from './components/QuestionsContainer.jsx';
 import { createTheme, ThemeProvider } from '@mui/material';
+import QuizzProvider from './context/context-quiz';
+import QuestionsContainer from './components/Pages/QuestionsContainer';
+import QuizzResults from './components/Pages/QuizzResults.jsx';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -58,7 +59,8 @@ const theme = createTheme({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="questions" element={<QuestionsContainer />}></Route>
+      <Route path="questions" element={<QuestionsContainer />} />
+      <Route path="results" element={<QuizzResults />} />
     </Route>
   )
 );
