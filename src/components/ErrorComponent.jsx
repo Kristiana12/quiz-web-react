@@ -1,11 +1,8 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
-const Error = () => {
+const ErrorComponent = () => {
   return (
     <Container
       sx={{ textAlign: 'center', padding: '4rem 1.5rem', maxWidth: '600px' }}
@@ -24,23 +21,15 @@ const Error = () => {
           variant="h5"
           sx={{ textTransform: 'uppercase', margin: '2rem 0 2.5rem' }}
         >
-          404 - Page not found
+          Something went wrong!
         </Typography>
         <Typography component="p" variant="subtitle1">
-          The page you are looking for might have been removed, has its name
-          changed or is temporarily unavailable.
+          Could not fech data from the server, make sure your internet
+          connection is stable. Refresh the page and try again.
         </Typography>
-        <Button variant="contained" sx={{ marginTop: '3rem' }}>
-          <StyledLink to="/">Go to Homepage</StyledLink>
-        </Button>
       </Box>
     </Container>
   );
 };
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #fff;
-`;
-
-export default Error;
+export default ErrorComponent;

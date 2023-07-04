@@ -6,11 +6,14 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import QuizzProvider from './context/context-quiz';
 import QuestionsContainer from './components/Pages/QuestionsContainer';
 import QuizzResults from './components/Pages/QuizzResults.jsx';
+import Error from './components/Pages/Error.jsx';
+import ErrorComponent from './components/ErrorComponent.jsx';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
+  Navigate,
 } from 'react-router-dom';
 
 const theme = createTheme({
@@ -58,9 +61,11 @@ const theme = createTheme({
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route path="questions" element={<QuestionsContainer />} />
       <Route path="results" element={<QuizzResults />} />
+      <Route path="404" element={<Error />} />
+      <Route path="*" element={<Navigate to="404" replace />} />
     </Route>
   )
 );

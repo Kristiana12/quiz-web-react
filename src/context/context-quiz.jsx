@@ -76,6 +76,8 @@ const reducer = (state, action) => {
         ...state,
         ...intialState,
       };
+    default:
+      return new Error('Something went wrong!');
   }
 };
 

@@ -101,14 +101,17 @@ const QuizzForm = ({ setLoading }) => {
         ? ''
         : '&difficulty=' + usersOptions.difficulty;
 
-    const response = await fetch(
-      `https://quizapi.io/api/v1/questions?apiKey=Kd5IrK7ez752QswbvDGtiPlQsigLtKJyhjhypArd${category}${difficulty}&limit=${limit}&filter=onlyMultipleCorrectAnswers`
-    );
-
-    const data = await response.json();
-    dispatch({ type: 'fetchQuestions', payload: data });
-    //redirect to new page
-    navigate('/questions');
+    try {
+      const response = await fetch(
+        `https://quizapi.io/api/v1/questions?apiKey=Kd5IrK7ez752QswbvDGtiPlQsigLtKJyhjhypArd${category}${difficulty}&limit=${limit}&filter=onlyMultipleCorrectAnswers`
+      );
+      const data = await response.json();
+      dispatch({ type: 'fetchQuestions', payload: data });
+      //redirect to new page
+      navigate('/questions');
+    } catch (error) {
+      console.log(error);
+    }
 
     setLoading(false);
   };
