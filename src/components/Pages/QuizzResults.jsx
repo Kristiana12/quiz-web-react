@@ -7,9 +7,11 @@ import Stack from '@mui/material/Stack';
 import { useContext } from 'react';
 import { QuizzContext } from '../../context/context-quiz';
 import MuiButton from '../UI/Button';
+import { useNavigate } from 'react-router-dom';
 
 const QuizzResults = () => {
-  const { correctAnswers, questions } = useContext(QuizzContext);
+  const { correctAnswers, questions, dispatch } = useContext(QuizzContext);
+  const navigate = useNavigate();
 
   const percentage = (correctAnswers / questions.length) * 100;
 
@@ -35,7 +37,7 @@ const QuizzResults = () => {
             maxWidth: '400px',
             margin: '0 auto',
             textAlign: 'center',
-            padding: '1.5rem 2rem',
+            padding: '1.5rem 2rem 3.5rem',
           }}
         >
           <Box sx={{ width: '120px', margin: '2rem auto 1.5rem' }}>
@@ -83,7 +85,15 @@ const QuizzResults = () => {
             &nbsp; were correct.
           </Typography>
         </Paper>
-        <MuiButton variant="contained">Start new Quiz!</MuiButton>
+        <MuiButton
+          onClick={() => {
+            dispatch({ type: 'reset' });
+            navigate('/');
+          }}
+          variant="contained"
+        >
+          Start new Quiz!
+        </MuiButton>
       </Stack>
     </Container>
   );

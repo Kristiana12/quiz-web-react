@@ -71,6 +71,11 @@ const reducer = (state, action) => {
       return {
         ...state,
       };
+    case 'reset':
+      return {
+        ...state,
+        ...intialState,
+      };
   }
 };
 
@@ -86,7 +91,6 @@ const QuizzProvider = ({ children }) => {
     indexOfCorrectAnswer,
     correctAnswers,
   } = state;
-  // console.log(results);
 
   const data = {
     questions,
