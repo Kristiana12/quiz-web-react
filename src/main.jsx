@@ -67,7 +67,7 @@ const router = createBrowserRouter(
       <Route path="404" element={<Error />} />
       <Route path="*" element={<Navigate to="404" replace />} />
     </Route>,
-    { basename: import.meta.env.DEV ? '/' : '/quiz-web-app/' }
+    { basename: import.meta.env.DEV ? '/' : '/quiz-web-react/' }
   )
 );
 
