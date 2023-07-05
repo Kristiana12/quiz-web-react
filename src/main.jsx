@@ -64,8 +64,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
       <Route path="questions" element={<QuestionsContainer />} />
       <Route path="results" element={<QuizzResults />} />
-      <Route path="404" element={<Error />} />
-      <Route path="*" element={<Navigate to="404" replace />} />
+      <Route path="/404" element={<Error />} />
+      <Route path="*" element={<Navigate to="/404" replace={true} />} />
     </Route>
   ),
   { basename: import.meta.env.DEV ? '/' : '/quiz-web-react/' }
