@@ -61,39 +61,14 @@ const theme = createTheme({
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    [
-      {
-        path: '/',
-        element: <App />,
-        errorElement: <ErrorComponent />,
-        children: [
-          {
-            path: 'questions',
-            element: <QuestionsContainer />,
-          },
-          {
-            path: 'results',
-            element: <QuizzResults />,
-          },
-          {
-            path: '404',
-            element: <Error />,
-          },
-          {
-            path: '*',
-            element: <Navigate replace to="404" />,
-          },
-        ],
-      },
-    ],
-    // <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
-    //   <Route path="questions" element={<QuestionsContainer />} />
-    //   <Route path="results" element={<QuizzResults />} />
-    //   <Route path="404" element={<Error />} />
-    //   <Route path="*" element={<Navigate to="404" replace />} />
-    // </Route>,
-    { basename: import.meta.env.DEV ? '/' : '/quiz-web-react/' }
-  )
+    <Route path="/" element={<App />} errorElement={<ErrorComponent />}>
+      <Route path="questions" element={<QuestionsContainer />} />
+      <Route path="results" element={<QuizzResults />} />
+      <Route path="404" element={<Error />} />
+      <Route path="*" element={<Navigate to="404" replace />} />
+    </Route>
+  ),
+  { basename: import.meta.env.DEV ? '/' : '/quiz-web-react/' }
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
